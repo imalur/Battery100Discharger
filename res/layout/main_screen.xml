@@ -1,0 +1,63 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/main_screen_padding"
+    android:background="@drawable/back"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView 
+        android:layout_weight="1"
+        android:layout_width="@dimen/logo_size"    
+       	android:layout_height="@dimen/logo_size"
+       	android:src="@drawable/logo"
+       	android:layout_gravity="center" 
+        />
+    <LinearLayout 
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical"
+        >
+        <Button
+            android:id="@+id/btnInstructions"
+            style="@style/ButtonStyle"
+            android:layout_marginTop="0dp"
+            android:onClick="onButtonClick"
+            android:text="@string/btn_instructions_text"
+            />
+        <Button
+            android:id="@+id/btnB8"
+            style="@style/ButtonStyle"
+            android:onClick="onButtonClick"
+            android:text="@string/btn_b8_text"            
+            />
+        <CheckBox
+            android:id="@+id/cbShow08"
+            style="@style/ButtonStyle"
+            android:onClick="onButtonClick"
+            android:text="@string/check_box_text"            
+            />
+        
+        <Button
+            android:id="@+id/btn08"
+            style="@style/ButtonStyle"
+            android:visibility="gone"
+            android:onClick="onButtonClick"
+            android:text="@string/btn_08_text"            
+            />
+        <Button
+            android:id="@+id/btnReboot"
+            style="@style/ButtonStyle"
+            android:onClick="onButtonClick"
+            android:text="@string/btn_reboot_text"            
+            />
+        
+    </LinearLayout>
+    
+
+</LinearLayout>
+    

@@ -1,0 +1,73 @@
+<resources>
+
+    <string name="app_name">Battery 100% Fixer</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main_screen">Battery 100% Fixer</string>
+    <string name="toast_not_rooted">Device Not Rooted</string>
+    <string name="toast_b8">Success B8. Now reboot device</string>
+    <string name="toast_08">Success 08. Now reboot device</string>
+    <string name="toast_reboot">Success Rebooting</string>
+    <string name="toast_error">Error</string>
+    <string name="about_dialog_title">Instructions</string>
+    <string name="about_dialog_message">
+<![CDATA[          
+  <p> 
+  Рекомендуется разрядить устройство почти до минимума. 
+  Драйвер управления 
+  электропитанием выставляет регистры чипа AXP202 
+  через виртуальный <i>axp20_reg</i> файл. 
+  <h3> Сброс контроллера питания </h3> 
+  Последовательно выполняются команды:
+  <p>
+  <i>echo B8 > /sys/devices/i2c-2/2-0034/axp20_reg </i><br>
+  <i>echo B820 > /sys/devices/i2c-2/2-0034/axp20_reg</i><br>
+  <p>
+  <b>echo B8</b> только выбирает регистр <i>0xB8</i>, 
+  так, чтобы последующее чтение <i>axp20_reg</i> возвратило значение 
+  регистра. Т.е. строка  <b>echo B8</b> в принципе не обязательна. 
+  <br>
+  <b>echo B820</b>  выбирает регистр <i>0xB8</i> и пишет 
+  значение 0x20. Это устанавливает бит 5 в 1, а все другие биты в 0. 
+  Согласно спецификации, это очистит счетчики чипа, 
+  которые используются драйвером для вычисления уровня батареи.  
+  <h3> Обнуление регистров </h3> 
+  <b><font color="red">Следует применять, только если предыдущий метод не помог.</font></b><br>
+  Последовательно выполняются команды:
+  <p>
+  <i>echo 08 > /sys/devices/i2c-2/2-0034/axp20_reg </i><br>
+  <i>echo 0800 > /sys/devices/i2c-2/2-0034/axp20_reg</i>
+  <p>
+  Дополнительная команда <b>0800</b> запишет значение <i>0x00</i> 
+  в регистр <i>0x08</i>. Спецификация говорит, что регистры от 
+  <i>0x04</i> до <i>0x0F</i> являются кэшем. Значения в нем будут сохранены 
+  между завершениями работы и перезагрузками, 
+  пока у AXP202 есть даже малейший бит AC или питания от батареи. 
+  ]]>
+    </string>
+    <string name="b8_dialog_title">B8</string>
+    <string name="b8_dialog_message">
+<![CDATA[
+                
+        ]]>
+    </string>
+    <string name="_08_dialog_title">B0</string>
+    <string name="_08_dialog_message">
+<![CDATA[
+                
+        ]]>
+    </string>
+    <string name="reboot_dialog_title">Reboot</string>
+    <string name="reboot_dialog_message">
+<![CDATA[
+                
+        ]]>
+    </string>
+    <string name="check_box_text">Controller Reset doesn\'t help</string>
+    <string name="btn_instructions_text">Instructions</string>
+    <string name="btn_b8_text">Reset Supply Controller</string>
+    <string name="btn_08_text">Reset Driver Registers</string>
+    <string name="btn_reboot_text">Reboot</string>
+    <string name="btn_close">Close</string>
+
+</resources>

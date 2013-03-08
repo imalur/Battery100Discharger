@@ -1,4 +1,6 @@
-package com.example.battery100discharger;
+package com.imalur.battery100discharger;
+
+import com.imalur.battery100discharger.R;
 
 import android.app.Activity;
 import android.os.Bundle;

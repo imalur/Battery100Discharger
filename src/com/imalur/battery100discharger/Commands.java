@@ -1,4 +1,4 @@
-package com.example.battery100discharger;
+package com.imalur.battery100discharger;
 
 public class Commands {
 	public static final String ECHO_B8 = "echo B8 > /sys/devices/i2c-2/2-0034/axp20_reg";

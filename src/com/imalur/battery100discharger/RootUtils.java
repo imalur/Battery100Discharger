@@ -1,8 +1,10 @@
-package com.example.battery100discharger;
+package com.imalur.battery100discharger;
 
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+
+import com.imalur.battery100discharger.R;
 
 import android.content.Context;
 import android.widget.Toast;

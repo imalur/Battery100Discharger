@@ -1,16 +1,5 @@
 <resources>
-
-    <!-- TODO
-    	переименовать лого
-    	иконки
-    	перевод на русский (и инструкция на английском)
-    	большое лого для маркета
-    	скриншоты для маркета
-    
-     -->
     <string name="app_name">Battery 100% Discharger</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
     <string name="toast_not_rooted">Device Not Rooted</string>
     <string name="toast_b8">Success Supply Controller Reset. Now reboot device</string>
     <string name="toast_08">Success Registers Reset. Now reboot device</string>
@@ -20,45 +9,39 @@
     <string name="about_dialog_title">Instructions</string>
     <string name="about_dialog_message">
 <![CDATA[ 
- Приложение призвано исправить проблему с зависшим на 100% уровнем индикатора батареи 
- (проблема характерна для некоторых устройств <b>Ainol</b>)   
+ This application can fix the 100% battery stuck problem  for <b>Ainol Aurora 2 , Elf 2</b> devices   
     <p>
-	&#8226;<font color="blue">Получите root-права.</font><br>
-	&#8226;Рекомендуется разрядить устройство почти до минимума.<br>
-	&#8226;Выполните <b>сброс контроллера питания</b>.<br>
-	&#8226;Перезагрузите планшет.<br>
-	&#8226;Индикатор заряда батареи покажет уровень заряда 5&#37;.<br>
-	&#8226;Подключите зарядное устройство и зарядите планшет полностью.<br>    
-	&#8226;ТОЛЬКО если починить индикатор заряда аккумулятора методом, 
-	описанным выше, не удалось,	выполните <b>обнуление регистров</b>.
-  <h3> Сброс контроллера питания </h3> 
-   Последовательно выполняются команды:
+	&#8226;<font color="blue">your tablet must be rooted</font><br>
+	&#8226;let your battery nearly completely discharge (for example watch some 
+		movie or play games to run out the battery), 
+		it may help to more accurate the battery percentage<br>
+	&#8226;press <b>Reset Supply Controller</b> button.<br>
+	&#8226;at this time you can reboot your tablet and the battery will run down to 5&#37; <br>
+	&#8226;then you can try to full charge your tablet to see the problem is fixed or not.<br>
+	&#8226;ONLY  if the problem still exist, activate and press 
+	<b>Reset Driver Registers </b> button.
+  <h3>Supply Controller Reset </h3> 
+    The following commands will be executed:
   <p>
   <i>echo B8 > /sys/devices/i2c-2/2-0034/axp20_reg </i><br>
   <i>echo B820 > /sys/devices/i2c-2/2-0034/axp20_reg</i><br>
   <p>  
-  Драйвер управления   электропитанием выставляет регистры 
-  чипа AXP202 через виртуальный <i>axp20_reg</i> файл.<br>    
-  <b>echo B8</b> только выбирает регистр <i>0xB8</i>, 
-  так, чтобы последующее чтение <i>axp20_reg</i> возвратило значение 
-  регистра. Т.е. строка  <b>echo B8</b> в принципе не обязательна. 
-  <br>
-  <b>echo B820</b>  выбирает регистр <i>0xB8</i> и пишет 
-  значение 0x20. Это устанавливает бит 5 в 1, а все другие биты в 0. 
-  Согласно спецификации, это очистит счетчики чипа, 
-  которые используются драйвером для вычисления уровня батареи.  
-  <h3> Обнуление регистров </h3> 
-  <b><font color="red">Следует применять, только если предыдущий метод не помог.</font></b><br>
-  Последовательно выполняются команды:
+  	The <b>echo B820</b> command writes <i>20</i> into register <i>B8</i>, 
+  	which resets the Coulomb counters to 0. 
+	The former (20) also disables the Coulomb counters. <br>
+	The driver will automatically re-enable them on the next boot.
+
+  <h3>Driver Registers Reset </h3> 
+  <b><font color="red">ONLY do the following steps if you still got battery 
+  	stuck after controller reset</font></b><br>
+  The following commands will be executed:
   <p>
   <i>echo 08 > /sys/devices/i2c-2/2-0034/axp20_reg </i><br>
   <i>echo 0800 > /sys/devices/i2c-2/2-0034/axp20_reg</i>
   <p>
-  Дополнительная команда <b>0800</b> запишет значение <i>0x00</i> 
-  в регистр <i>0x08</i>. Спецификация говорит, что регистры от 
-  <i>0x04</i> до <i>0x0F</i> являются кэшем. Значения в нем будут сохранены 
-  между завершениями работы и перезагрузками, 
-  пока у AXP202 есть даже малейший бит AC или питания от батареи. 
+  The <b>0800</b> command writes <i>00</i> into register <i>08</i>, which is used by the driver. 
+	You can use any hexadecimal value from 00 (zero) to 64 (hundred) to set the battery level to that value. 
+This won\'t work with newer drivers/firmwares, however.   
   ]]>
     </string>
     
@@ -69,7 +52,7 @@
 	  <i>echo B8 > /sys/devices/i2c-2/2-0034/axp20_reg </i><br>
 	  <i>echo B820 > /sys/devices/i2c-2/2-0034/axp20_reg</i><br>
 	  <p>  
-	  Do you wish to continue?       
+	  Do you want to continue?       
         ]]>
     </string>
     <string name="_08_dialog_title">Reset Driver Registers</string>
@@ -79,12 +62,12 @@
 	  <i>echo 08 > /sys/devices/i2c-2/2-0034/axp20_reg </i><br>
 	  <i>echo 0800 > /sys/devices/i2c-2/2-0034/axp20_reg</i><br>
 	  <p>  
-	  Do you wish to continue?       
+	  Do you want to continue?       
         ]]>
     </string>
     <string name="reboot_dialog_title">Reboot Device</string>
     <string name="reboot_dialog_message"><![CDATA[
-        Do you wish to continue?         
+        Do you want to continue?         
         ]]>
     </string>
     <string name="check_box_text">Controller Reset doesn\'t help</string>
